@@ -3,6 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Sellito: si esta tarjeta está asignada a un negocio (panel del proveedor → Negocios → Tarjetas NFC), abre su página de botones. Si no, se ve esta página. -->
+    <style id="nfc-espera">body{visibility:hidden}</style>
+    <script>
+    (function(){var c='negocio9',l=0,ver=function(){if(l)return;l=1;var s=document.getElementById('nfc-espera');if(s)s.parentNode.removeChild(s);};
+    setTimeout(ver,1500);
+    try{fetch('https://bnyfhoxrezvotfktrxmb.supabase.co/rest/v1/rpc/nfc_destino',{method:'POST',headers:{'Content-Type':'application/json',apikey:'sb_publishable_tSt87CXb32Up5zSTfgTfZg_uVVMXuuS'},body:JSON.stringify({p_codigo:c})})
+    .then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&d.url&&/^https:\/\/sellito-clientes\.vercel\.app\//.test(d.url)){l=1;location.replace(d.url)}else ver()})['catch'](ver)}catch(e){ver()}})();
+    </script>
     <title>Contacto - La Bosch</title>
  <link rel="stylesheet" href="styles.css">
 </head>
